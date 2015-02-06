@@ -27,6 +27,8 @@ module ActiveAdmin
               text_node stylesheet_link_tag(style, options).html_safe
             end
 
+            text_node '<foo></foo>'
+
             active_admin_application.javascripts.each do |path|
               text_node(javascript_include_tag(path))
             end
