@@ -24,10 +24,12 @@ module ActiveAdmin
           within @head do
             insert_tag Arbre::HTML::Title, [title, render_or_call_method_or_proc_on(self, active_admin_namespace.site_title)].compact.join(" | ")
             active_admin_application.stylesheets.each do |style, options|
-              text_node stylesheet_link_tag(style, options).html_safe
+              text_node ActionController::Base.helpers.stylesheet_link_tag(style, options).html_safe
             end
 
-            text_node '<foo></foo>'
+            text_node p(self.method(:stylesheet_link_tag))
+            text_node p(Rails.application.config.assets.prefix)
+            text_node p(ActionController::Base.helpers.stylesheet_link_tag('active_admin.css'))
 
             active_admin_application.javascripts.each do |path|
               text_node(javascript_include_tag(path))
